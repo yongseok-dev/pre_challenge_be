@@ -103,7 +103,22 @@
   - iteravle protocol: 순회 가능한 자료형은 해당 프로토콜을 따라야 한다.
     - for...of 문으로 순회 가능
 - 함수의 합성 (pipe)
-- 커링을 이용해서 로직을 더 간단하게 나타내기
+
+```
+const pipe = (arr, ...functions) => reduce(func:(prev, func) =>func(prev), arr, functions)
+```
+
+- curry(커링) 이용: 로직을 더 간단하게 나타내기
+
+```
+    const curry =
+        (func) =>
+        (a, ...args) =>
+            args.length > 0
+                ? func(a, ...args)
+                : (...args) => func(a, ...args)
+```
+
 - 지연평가
 - SQL Injection Prevention 미들웨어 구현하기
 - 알고리즘 문제를 함수형 패러다임으로 해결해 보기
