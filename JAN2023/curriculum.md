@@ -153,14 +153,22 @@ const pipe = (arr, ...functions) => reduce(func:(prev, func) =>func(prev), arr, 
 ```
 
 - SQL Injection Prevention 미들웨어 구현하기
+  - 구현 상황을 나눈다.
+    1. req.query => Object => Array
+    2. Array [key, value]
+    3. value -> filter(reg) -> result
+    4. result => Object
+  - 재귀적으로 발생하는 문제는 재귀로 해결한다.
+  - 함수형 프로그래밍을 사용하면, 어디를 수정해서 문제를 해결할 수 있을지 알 수 있다.
 - 알고리즘 문제를 함수형 패러다임으로 해결해 보기
   - 요구사항에 따라서 적절한 함수를 생각하기
   - map: 배열의 각 인수에 콜백함수를 적용해 새로운 배열을 생성
   - filter: 인수로 콜백함수를 받아서 엘리먼트를 함수에 넣어 true -> O, fales -> X 새로운 배열을 생성
   - reduce: 배열을 순회하면서 함수를 적용하고 새로운 결과 값을 얻음
-- [아하!모먼트] 만 2년의 경력, 네 번째 회사에 정착한 이야기
 
 ## Week 1-2. Nest.js 로 객체지향 이해해 보기
+
+- [아하!모먼트] 만 2년의 경력, 네 번째 회사에 정착한 이야기
 
 아키텍처, 의존성 주입, 단위 테스트
 
