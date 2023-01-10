@@ -65,7 +65,44 @@
     - 나, 우리, 그리도 팀이 원하는 의사결정
 
 - 고차 함수(map, filter, reduce)를 함께 구현해 보기
-- 함수의 합성
+  1. map
+  ```
+      const map = (func, arr) =>{
+          const result = []
+          for (const el of arr){
+              result.push(func(el))
+          }
+          return result
+      }
+  ```
+  2. filter
+  ```
+    const filter = (func, arr) =>{
+        const result = []
+        for (const el of arr){
+            if(func(el)){
+                result.push(el)
+            }
+        }
+        return result
+    }
+  ```
+  3. reduce
+  ```
+    const reduce = (func, acc, arr) =>{
+        if(arr === undefined){
+            arr = acc[Symbol.iterator]
+            acc = arr.next().value
+        }
+        for (const el of arr){
+            acc = func(acc, el)
+        }
+        return acc
+    }
+  ```
+  - iteravle protocol: 순회 가능한 자료형은 해당 프로토콜을 따라야 한다.
+    - for...of 문으로 순회 가능
+- 함수의 합성 (pipe)
 - 커링을 이용해서 로직을 더 간단하게 나타내기
 - 지연평가
 - SQL Injection Prevention 미들웨어 구현하기
