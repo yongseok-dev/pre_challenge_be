@@ -68,37 +68,37 @@
   1. map
   ```
       const map = (func, arr) =>{
-          const result = []
+          const result = [];
           for (const el of arr){
-              result.push(func(el))
+              result.push(func(el));
           }
-          return result
-      }
+          return result;
+      };
   ```
   2. filter
   ```
     const filter = (func, arr) =>{
-        const result = []
+        const result = [];
         for (const el of arr){
             if(func(el)){
-                result.push(el)
+                result.push(el);
             }
         }
-        return result
-    }
+        return result;
+    };
   ```
   3. reduce
   ```
     const reduce = (func, acc, arr) =>{
         if(arr === undefined){
-            arr = acc[Symbol.iterator]
-            acc = arr.next().value
+            arr = acc[Symbol.iterator];
+            acc = arr.next().value;
         }
         for (const el of arr){
-            acc = func(acc, el)
+            acc = func(acc, el);
         }
-        return acc
-    }
+        return acc;
+    };
   ```
   - iteravle protocol: 순회 가능한 자료형은 해당 프로토콜을 따라야 한다.
     - for...of 문으로 순회 가능
@@ -109,6 +109,7 @@ const pipe = (arr, ...functions) => reduce(func:(prev, func) =>func(prev), arr, 
 ```
 
 - curry(커링) 이용: 로직을 더 간단하게 나타내기
+  - 함수의 평가 시점을 값이 들어오기 전까지는 미룬다(정말 실행 시점에 함수를 평가하고 실행됨)
 
 ```
     const curry =
@@ -116,10 +117,41 @@ const pipe = (arr, ...functions) => reduce(func:(prev, func) =>func(prev), arr, 
         (a, ...args) =>
             args.length > 0
                 ? func(a, ...args)
-                : (...args) => func(a, ...args)
+                : (...args) => func(a, ...args);
 ```
 
-- 지연평가
+=> map에 적용
+
+```
+    const map = curry((func, arr) =>{
+        const result = [];
+        for (const el of arr){
+            result.push(func(el));
+        }
+        return result;
+    })
+```
+
+- 지연평가: 데이터가 평가 되지 않은 상태
+  - js: 제너레이터 사용
+
+```
+    const range = function* (limit){
+        let i = -1;
+        while (++i<limit){
+            yield i;
+        }
+    };
+    console.log(range(5));
+    /*
+    0
+    1
+    2
+    3
+    4
+    */
+```
+
 - SQL Injection Prevention 미들웨어 구현하기
 - 알고리즘 문제를 함수형 패러다임으로 해결해 보기
   - 요구사항에 따라서 적절한 함수를 생각하기
